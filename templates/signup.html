@@ -1,0 +1,193 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>New Service - Sign Up</title>
+    <style>
+        /* CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>New Service - Sign Up</h1>
+    <form id="signup-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password">
+    
+        <input type="button" value="Sign Up" onclick="signup()">
+    </form>
+    
+    <p id="result"></p>
+    
+    <script>
+        function signup() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+    
+            if (password !== confirmPassword) {
+                var result = document.getElementById("result");
+                result.innerHTML = "Passwords do not match";
+                return;
+            }
+    
+            var payload = {
+                "name": name,
+                "email": email,
+                "password": password
+            };
+    
+            fetch("/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                var result = document.getElementById("result");
+                result.innerHTML = data.result;
+    
+                if (data.result === "signup success") {
+                    // Redirect to the welcome page if signup is successful
+                    setTimeout(function () {
+                        window.location.href = "/";
+                    }, 3000); // 5 seconds timeout
+                }
+            });
+        }
+    </script>
+</body>
+</html>     -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Service - Sign Up</title>
+    <style>
+        body {
+            background-image: url("https://www.sriramakrishnahospital.com/wp-content/uploads/2021/09/Hepatitis_classification.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 50px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+            border: 1px solid #cccccc;
+        }
+
+        input[type="submit"] {
+            background-color: #337ab7;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #23527c;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 10px;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Service - Sign Up</h1>
+    <form id="signup-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+    
+        <input type="submit" value="Sign Up">
+    </form>
+    
+    <p id="result"></p>
+    
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+    
+            if (password !== confirmPassword) {
+                var result = document.getElementById("result");
+                result.innerHTML = "Passwords do not match";
+                return;
+            }
+    
+            var payload = {
+                "name": name,
+                "email": email,
+                "password": password
+            };
+    
+            fetch("/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                var result = document.getElementById("result");
+                result.innerHTML = data.result;
+    
+                if (data.result === "signup success") {
+                    // Redirect to the welcome page if signup is successful
+                    setTimeout(function () {
+                        window.location.href = "/";
+                    }, 3000); // 3 seconds timeout
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liver Disease Predictor</title>
+    <style>
+        body {
+            background-image: url("https://www.sriramakrishnahospital.com/wp-content/uploads/2021/09/Hepatitis_classification.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            font-weight: bold
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="button"]:hover {
+            background-color: #3e8e41;
+        }
+        
+        #result {
+            font-weight: bolder;
+            margin-top: 20px;
+            text-align: center;
+            font-size: x-large;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liver Disease Predictor</h1>
+    <form id="predict-form">
+        <label for="AGE">AGE:</label>
+        <input type="text" id="AGE" name="AGE">
+
+        <label for="GEN">GENDER:</label>
+        <input type="text" id="GEN" name="GEN">
+
+        <label for="TP">Total Protiens:</label>
+        <input type="text" id="TP" name="TP">
+
+        <label for="AAP">Alkphos Alkaline Phosphotase:</label>
+        <input type="text" id="AAP" name="AAP">
+        
+        <label for="ALBA">ALB Albumin:</label>
+        <input type="text" id="ALBA" name="ALBA">
+        
+        <label for="AGR">A/G Ratio Albumin and Globulin Ratio:</label>
+        <input type="text" id="AGR" name="AGR">
+        
+        <label for="DB">Direct Bilirubin:</label>
+        <input type="text" id="DB" name="DB">
+        
+        <label for="SGOT">SGOT Aspartate Aminotransferase:</label>
+        <input type="text" id="SGOT" name="SGOT">
+        
+        <label for="SGPT">SGPT Alamine Aminotransferase:</label>
+        <input type="text" id="SGPT" name="SGPT">
+        
+        <label for="TB">Total Bilirubin:</label>
+        <input type="text" id="TB" name="TB">
+        
+        <input type="button" value="Predict" onclick="predict()">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function predict() {
+            var AGE = document.getElementById("AGE").value;
+            var GEN=document.getElementById("GEN").value;
+            var TP=document.getElementById("TP").value;
+            var AAP = document.getElementById("AAP").value;
+            var ALBA = document.getElementById("ALBA").value;
+            var AGR = document.getElementById("AGR").value;
+            var DB = document.getElementById("DB").value;
+            var SGOT = document.getElementById("SGOT").value;
+            var SGPT = document.getElementById("SGPT").value;
+            var TB = document.getElementById("TB").value;
+
+            var payload = {
+                "AGE":AGE,
+                "GEN":GEN,
+                "TP":TP,
+                "AAP": AAP,
+                "ALBA": ALBA,
+                "AGR": AGR,
+                "DB": DB,
+                "SGOT": SGOT,
+                "SGPT": SGPT,
+                "TB": TB,
+                "AGE":AGE,
+            };
+
+            fetch("/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.text())
+            .then(data => {
+                var result = document.getElementById("result");
+                result.innerHTML = data;
+            });
+        }
+    </script>
+</body>
+</html>
