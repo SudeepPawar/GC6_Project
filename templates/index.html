@@ -9,18 +9,23 @@
             background-size: cover;
             font-family: Arial, sans-serif;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        h1 {
+            text-align: center;
             margin-top: 20px;
-            font-weight: bold
+        }
+        form {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-weight: bold;
+            padding-right: 100px;
         }
         
         label {
-            display: block;
-            margin-bottom: 10px;
+            text-align: right;
         }
         
         input[type="text"] {
@@ -31,7 +36,8 @@
         }
         
         input[type="button"] {
-            padding: 10px 20px;
+            padding: 12px 50px; /* Adjust the padding to make the button longer */
+            width: 300px; /* Adjust the width to make the button longer */
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -44,14 +50,16 @@
         }
         
         #result {
-            font-weight: bolder;
             margin-top: 20px;
             text-align: center;
             font-size: x-large;
+            font-weight: bold;
         }
-
-        h1 {
-            text-align: center;
+        
+        .submitabc {
+            margin: 0 auto;
+            margin-top: 10px;
+            display: block;
         }
     </style>
 </head>
@@ -88,16 +96,16 @@
         <label for="TB">Total Bilirubin:</label>
         <input type="text" id="TB" name="TB">
         
-        <input type="button" value="Predict" onclick="predict()">
     </form>
+    <input class="submitabc" type="button" value="Predict" onclick="predict()">
 
     <p id="result"></p>
 
     <script>
         function predict() {
             var AGE = document.getElementById("AGE").value;
-            var GEN=document.getElementById("GEN").value;
-            var TP=document.getElementById("TP").value;
+            var GEN = document.getElementById("GEN").value;
+            var TP = document.getElementById("TP").value;
             var AAP = document.getElementById("AAP").value;
             var ALBA = document.getElementById("ALBA").value;
             var AGR = document.getElementById("AGR").value;
@@ -107,17 +115,16 @@
             var TB = document.getElementById("TB").value;
 
             var payload = {
-                "AGE":AGE,
-                "GEN":GEN,
-                "TP":TP,
+                "AGE": AGE,
+                "GEN": GEN,
+                "TP": TP,
                 "AAP": AAP,
                 "ALBA": ALBA,
                 "AGR": AGR,
                 "DB": DB,
                 "SGOT": SGOT,
                 "SGPT": SGPT,
-                "TB": TB,
-                "AGE":AGE,
+                "TB": TB
             };
 
             fetch("/predict", {
